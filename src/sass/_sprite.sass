@@ -1,0 +1,75 @@
+/*
+  SASS variables are information about icon's compiled state, stored under its original file name
+
+  .icon-home
+    width: $icon-home-width
+
+  The large array-like variables contain all information about a single icon
+  $icon-home: x y offset_x offset_y width height total_width total_height image_path
+  */
+$s-horror-x: 0px
+$s-horror-y: 0px
+$s-horror-offset-x: 0px
+$s-horror-offset-y: 0px
+$s-horror-width: 16px
+$s-horror-height: 16px
+$s-horror-total-width: 33px
+$s-horror-total-height: 33px
+$s-horror-image: 'img/sprite.png'
+$s-horror: 0px 0px 0px 0px 16px 16px 33px 33px 'img/sprite.png'
+$s-paperclip-x: 17px
+$s-paperclip-y: 0px
+$s-paperclip-offset-x: -17px
+$s-paperclip-offset-y: 0px
+$s-paperclip-width: 16px
+$s-paperclip-height: 16px
+$s-paperclip-total-width: 33px
+$s-paperclip-total-height: 33px
+$s-paperclip-image: 'img/sprite.png'
+$s-paperclip: 17px 0px -17px 0px 16px 16px 33px 33px 'img/sprite.png'
+$s-tree-x: 0px
+$s-tree-y: 17px
+$s-tree-offset-x: 0px
+$s-tree-offset-y: -17px
+$s-tree-width: 16px
+$s-tree-height: 16px
+$s-tree-total-width: 33px
+$s-tree-total-height: 33px
+$s-tree-image: 'img/sprite.png'
+$s-tree: 0px 17px 0px -17px 16px 16px 33px 33px 'img/sprite.png'
+
+/*
+  The provided mixins are intended to be used with the array-like variables
+
+  .icon-home
+    @include sprite-width($icon-home)
+
+  .icon-email
+    @include sprite($icon-email)
+  */
+@mixin sprite-width($sprite)
+  width: nth($sprite, 5)
+
+@mixin sprite-height($sprite)
+  height: nth($sprite, 6)
+
+@mixin sprite-position($sprite)
+  $sprite-offset-x: nth($sprite, 3)
+  $sprite-offset-y: nth($sprite, 4)
+  background-position: $sprite-offset-x  $sprite-offset-y
+
+@mixin sprite-image($sprite)
+  $sprite-image: nth($sprite, 9)
+  background-image: url(#{$sprite-image})
+
+@mixin sprite-box($sprite)
+  @include sprite-image($sprite)
+  @include sprite-position($sprite)
+  @include sprite-width($sprite)
+  @include sprite-height($sprite)
+  background-repeat: no-repeat
+  
+@mixin sprite($sprite)
+  @include sprite-image($sprite)
+  @include sprite-position($sprite)
+  background-repeat: no-repeat  

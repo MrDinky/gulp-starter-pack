@@ -10,15 +10,25 @@ let gulp 		= require('gulp'),
 	imagemin 	= require('gulp-imagemin'),
 	pngquant    = require('imagemin-pngquant'),
 	cache       = require('gulp-cache'),
-	spritesmith = require('gulp.spritesmith');
+	spritesmith = require('gulp.spritesmith'),
+	flexbugs    = require('postcss-flexbugs-fixes'),
+	postcss     = require('gulp-postcss');
 
+	
+var processors = [
+  prefixer({
+    browsers: ['last 10 versions'],
+    remove: true
+    cascade: false
+  }),
+  flexbugs()
+];	
+	
+	
 gulp.task('sass', function () {
 	return gulp.src('src/sass/**/*.+(sass|scss)')
 		.pipe(sass().on('error', sass.logError))
-		.pipe(prefixer({
-            browsers: ['last 2 versions'],
-            cascade: false
-        }))
+		.pipe(postcss(processors))
 		.pipe(gulp.dest('src/css'))
 		.pipe(browserSync.stream());
 });

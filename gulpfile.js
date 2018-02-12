@@ -18,7 +18,7 @@ let gulp 		= require('gulp'),
 var processors = [
   prefixer({
     browsers: ['last 10 versions'],
-    remove: true
+    remove: true,
     cascade: false
   }),
   flexbugs()

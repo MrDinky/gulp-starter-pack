@@ -13,7 +13,6 @@ let gulp 		= require('gulp'),
 	spritesmith = require('gulp.spritesmith'),
 	flexbugs    = require('postcss-flexbugs-fixes'),
 	postcss     = require('gulp-postcss');
-
 	
 gulp.task('sass', function () {
 	return gulp.src('src/sass/**/*.+(sass|scss)')

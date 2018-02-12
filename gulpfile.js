@@ -15,20 +15,15 @@ let gulp 		= require('gulp'),
 	postcss     = require('gulp-postcss');
 
 	
-var processors = [
-  prefixer({
-    browsers: ['last 10 versions'],
-    remove: true
-    cascade: false
-  }),
-  flexbugs()
-];	
-	
-	
 gulp.task('sass', function () {
 	return gulp.src('src/sass/**/*.+(sass|scss)')
 		.pipe(sass().on('error', sass.logError))
-		.pipe(postcss(processors))
+		.pipe(prefixer({
+			browsers: ['last 10 versions'],
+			remove: true,
+			cascade: false
+		 }))
+		.pipe(postcss([flexbugs()]))
 		.pipe(gulp.dest('src/css'))
 		.pipe(browserSync.stream());
 });
